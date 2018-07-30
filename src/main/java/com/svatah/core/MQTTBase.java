@@ -17,8 +17,8 @@ import java.util.Scanner;
  * ***********************************/
 public class MQTTBase {
 
-	private static String topic = "IbotCVP/Publish/IbotCVP001/LockUnlock";
-	private static String broker = "tcp://13.127.19.41:1883";
+	private static String topic = "MQTT";
+	private static String broker = "tcp://localhost:1883";
 
 	public String getTopic() {
 		return topic;
@@ -87,7 +87,7 @@ public class MQTTBase {
 						System.exit(0);
 					}
 					try {
-						MqttClient client=send.connectClient("IbotCVP001",2);
+						MqttClient client=send.connectClient("atulsharma",2);
 						send.subscribeClient(client, null);
 						send.senderPublish(client, msg, 2);
 					} catch (MqttException e) {
@@ -105,7 +105,7 @@ public class MQTTBase {
 				MQTTBase receive=new MQTTBase();
 				MqttClient client;
 				try {
-					client = receive.connectClient("IbotCVP001",2);
+					client = receive.connectClient("atulsharma",2);
 					receive.subscribeClient(client, null);
 				} catch (MqttException e) {
 					// TODO Auto-generated catch block
