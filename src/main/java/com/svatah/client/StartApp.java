@@ -1,6 +1,8 @@
-package com.svatah;
+package com.svatah.client;
 
-import javax.swing.*;  
+import com.svatah.core.MQTTBase;
+
+import javax.swing.*;
 import java.awt.*;  
 import java.awt.event.*;  
 

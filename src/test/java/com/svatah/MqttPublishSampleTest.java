@@ -13,14 +13,15 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.logging.SimpleLogFormatter;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import org.junit.Test;
 
 public class MqttPublishSampleTest{
 
 	String topic        = "MQTT";
 	String broker       = "tcp://localhost:1883";
-	//String broker       = "tcp://localhost:1883";
 
-	public static void main(String [] args){
+	@Test
+	public void clientTest(){
 		Thread t1=new Thread(){
 			@Override
 			public void run(){
@@ -47,8 +48,6 @@ public class MqttPublishSampleTest{
 			}
 		};
 		t2.start();
-
-
 	}
 
 	public void testMQTTSender(String clientId, String content, int qos){

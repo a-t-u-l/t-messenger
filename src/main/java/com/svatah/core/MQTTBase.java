@@ -1,5 +1,6 @@
-package com.svatah;
+package com.svatah.core;
 
+import com.svatah.client.JavaClient;
 import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;

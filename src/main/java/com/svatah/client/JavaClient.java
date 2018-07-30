@@ -1,10 +1,10 @@
-package com.svatah;
+package com.svatah.client;
 
+import com.svatah.core.MQTTBase;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
