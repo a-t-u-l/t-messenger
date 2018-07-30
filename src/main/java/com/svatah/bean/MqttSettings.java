@@ -1,27 +1,34 @@
 package com.svatah.bean;
 
-import com.svatah.core.MQTTBase;
-
-/**
- * Created by AtulSharma on 30/07/18
- */
+/**************************************
+ * Swing based MQTT client Emulator
+ * @author atulsharma
+ * ***********************************/
 public class MqttSettings {
 
     private String topic;
     private String broker;
-    //by default QoS is 2
+    //by default QoS is 1
     private int qos;
     private String clientId;
+
+    public MqttSettings(String topic, String broker) {
+        this.topic = topic;
+        this.broker = broker;
+        this.qos = 1;
+    }
 
     public MqttSettings(String topic, String broker, String clientId) {
         this.topic = topic;
         this.broker = broker;
-        this.qos = 2;
+        this.clientId = clientId;
+        this.qos = 1;
     }
 
     public MqttSettings(String topic, String broker,String clientId, int qos) {
         this.topic = topic;
         this.broker = broker;
+        this.clientId = clientId;
         this.qos = qos;
     }
 
@@ -40,6 +47,10 @@ public class MqttSettings {
 
     public void setQos(int qos) {
         this.qos = qos;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
     public String getClientId() {

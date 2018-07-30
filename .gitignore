@@ -19,6 +19,7 @@
 *.tar.gz
 *.rar
 
+target/
 .DS_Store
 .idea/
 .classpath
