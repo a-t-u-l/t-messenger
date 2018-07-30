@@ -1,5 +1,6 @@
 package com.svatah.client;
 
+import com.svatah.bean.MqttSettings;
 import com.svatah.core.MQTTBase;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -98,31 +99,32 @@ public class JavaClient extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
+        MqttSettings mqttSettings = new MqttSettings("", "", "");
         try {
             MQTTBase send = new MQTTBase();
             if (e.getSource() == userButton || userButton.isEnabled() == false) {
                 if (userButton.isEnabled() == true) {
                     String user = username.getText();
-                    client = send.connectClient(user, 2);
+                    client = send.connectClient(user, mqttSettings.getBroker());
                     statusLabel.setText("Status : Connected");
                     messageDisplayBox.setText(null);
                     username.setEnabled(false);
                     userButton.setEnabled(false);
-                    send.subscribeClient(client, this);
-                    send.senderPublish(client, "came online", 2);
+                    send.subscribeClient(client, mqttSettings.getTopic(), this);
+                    send.senderPublish(client, mqttSettings.getTopic(), "came online", mqttSettings.getQos());
                 }
                 if (e.getSource() == sendButton) {
                     String text = messageWriteBox.getText();
                     messageWriteBox.setText("");
                     try {
-                        send.senderPublish(client, text, 2);
+                        send.senderPublish(client, mqttSettings.getTopic(), text, 2);
                     } catch (MqttException ex) {
                         // TODO Auto-generated catch block
                         ex.printStackTrace();
                     }
                 } else if (e.getSource() == disconnectButton) {
                     try {
-                        send.senderPublish(client, "went offline", 2);
+                        send.senderPublish(client, mqttSettings.getTopic(), "went offline", mqttSettings.getQos());
                         send.disconnect(client);
                         statusLabel.setText("Status : disonnected");
                         username.setEnabled(true);
@@ -135,10 +137,8 @@ public class JavaClient extends JFrame implements ActionListener {
             }
 
         } catch (MqttException e1) {
-            // TODO Auto-generated catch block
-            MQTTBase mqtt = new MQTTBase();
             e1.printStackTrace();
-            messageDisplayBox.setText("broker : " + mqtt.getBroker() + "\nTopic : " + mqtt.getTopic() + "\n" + e1.getCause().toString());
+            messageDisplayBox.setText("broker : " + mqttSettings.getBroker() + "\nTopic : " + mqttSettings.getTopic() + "\n" + e1.getCause().toString());
         }
     }
 }  
